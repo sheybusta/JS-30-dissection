@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Scoped CSS Variables and JS</title>
-    <link rel="stylesheet" href="./public/style.css" />
   </head>
   <body>
     <h2>Update CSS Variables with <span class="hl">JS</span></h2>
@@ -37,6 +36,21 @@
 
     <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500" />
 
-    <script type="module" src="./src/init/index.js"></script>
+    <script>
+      const inputs = document.querySelectorAll(".controls input");
+
+      function handleUpdate() {
+        const suffix = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        );
+      }
+
+      inputs.forEach((input) => input.addEventListener("change", handleUpdate));
+      inputs.forEach((input) =>
+        input.addEventListener("mousemove", handleUpdate)
+      );
+    </script>
   </body>
 </html>
